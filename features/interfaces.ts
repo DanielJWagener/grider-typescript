@@ -42,3 +42,5 @@ const printSummary = (item: Reportable): void => {
 
 printSummary(oldCivic);
 printSummary(drink);
+
+export {};
