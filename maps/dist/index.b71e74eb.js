@@ -576,21 +576,63 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"h7u1C":[function(require,module,exports) {
 /// <reference types="@types/google.maps" />
-// import { User } from "./User";
-// import { Company } from "./Company";
-let map;
-async function initMap() {
-    //@ts-ignore
-    const { Map } = await google.maps.importLibrary("maps");
-    map = new Map(document.getElementById("map"), {
-        center: {
-            lat: 0,
-            lng: 0
-        },
-        zoom: 1
-    });
+var _customMap = require("./CustomMap");
+(0, _customMap.CustomMap).initializeMap("map").then((customMap)=>{
+    customMap.googleMap;
+});
+
+},{"./CustomMap":"4qzxZ"}],"4qzxZ":[function(require,module,exports) {
+/// <reference types="@types/google.maps" />
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "CustomMap", ()=>CustomMap);
+class CustomMap {
+    constructor(map){
+        this.googleMap = map;
+    }
+    static async initializeMap(divId) {
+        //@ts-ignore
+        const { Map } = await google.maps.importLibrary("maps");
+        const customMap = new Map(document.getElementById(divId), {
+            center: {
+                lat: 0,
+                lng: 0
+            },
+            zoom: 1
+        });
+        return new CustomMap(customMap);
+    }
 }
-initMap();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"3Pa9a"}],"3Pa9a":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
 },{}]},["bSupV","h7u1C"], "h7u1C", "parcelRequire57d4")
 
