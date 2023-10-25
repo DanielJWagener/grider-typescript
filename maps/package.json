@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "@faker-js/faker": "^8.2.0"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3"
   }
 }
