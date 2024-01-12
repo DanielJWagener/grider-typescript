@@ -1,15 +1,14 @@
 import { User } from "./models/User";
+import axios from "axios";
 
-const user = new User({ name: "myname", age: 20 });
+axios.defaults.baseURL = "http://localhost:3000";
 
-user.on("change", () => {
-  console.log("Change 1");
-});
-user.on("change", () => {
-  console.log("Change 2");
-});
-user.on("save", () => {
-  console.log("Save was triggered");
-});
+const user = new User({ id: "7ea1" });
 
-user.trigger("sasdfs");
+user.fetch();
+
+user.set({ name: "NEW NAME", age: 9999 });
+user.save();
+
+const user2 = new User({ name: "new record", age: 0 });
+user2.save();
