@@ -1,5 +1,5 @@
-import axios, { AxiosResponse } from "axios";
 import { Eventing } from "./Eventing";
+import { Sync } from "./Sync";
 
 interface UserProps {
   id?: string;
@@ -7,8 +7,12 @@ interface UserProps {
   age?: number;
 }
 
+const rootUrl = "http://localhost:3000/users";
+
 export class User {
   public events: Eventing = new Eventing();
+  public sync: Sync<UserProps> = new Sync<UserProps>(rootUrl);
+
   constructor(private data: UserProps) {}
 
   get(propName: string): number | string {
@@ -17,21 +21,5 @@ export class User {
 
   set(update: UserProps): void {
     Object.assign(this.data, update);
-  }
-
-  fetch(): void {
-    axios.get(`/users/${this.get("id")}`).then((response: AxiosResponse): void => {
-      this.set(response.data);
-    });
-  }
-
-  save(): void {
-    const id = this.get("id");
-
-    if (id) {
-      axios.put(`/users/${id}`, this.data);
-    } else {
-      axios.post("/users", this.data);
-    }
   }
 }
